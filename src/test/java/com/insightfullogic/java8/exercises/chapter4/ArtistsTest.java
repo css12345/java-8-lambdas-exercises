@@ -8,19 +8,21 @@ import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
+import java.util.Optional;
+
 public class ArtistsTest {
 
     private final Artists optionalExamples = new Artists(SampleData.getThreeArtists());
 
     @Test
     public void indexWithinRange() {
-        Artist artist = optionalExamples.getArtist(0);
+        Artist artist = optionalExamples.getArtist(0).get();
         assertNotNull(artist);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void indexOutsideRange() {
-        optionalExamples.getArtist(4);
+       Assert.assertEquals(Optional.empty(),  optionalExamples.getArtist(4));
     }
 
     @Test
